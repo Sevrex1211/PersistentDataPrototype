@@ -5,6 +5,10 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class MenuUIHandler : MonoBehaviour
 {
     public TextMeshProUGUI BestScoreText;
@@ -16,6 +20,7 @@ public class MenuUIHandler : MonoBehaviour
     void Start()
     {
         StartButton.onClick.AddListener(StartNewGame);
+        QuitButton.onClick.AddListener(QuitGame);
     }
 
     // Update is called once per frame
@@ -27,5 +32,14 @@ public class MenuUIHandler : MonoBehaviour
     private void StartNewGame()
     {
         SceneManager.LoadScene(1);
+    }
+
+    private void QuitGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
     }
 }
