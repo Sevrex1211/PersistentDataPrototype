@@ -31,6 +31,11 @@ public class MenuUIHandler : MonoBehaviour
 
     private void StartNewGame()
     {
+        var instance = PersistentData.Instance;
+        instance.playerName = 
+            (string) NameInputField.text;
+        instance.LoadPlayerName();
+
         SceneManager.LoadScene(1);
     }
 
